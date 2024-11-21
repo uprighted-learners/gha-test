@@ -30,4 +30,4 @@ jobs:
     - name: Starts server
       run: npm run start
       env:
-        PORT: ${{secret.PORT}}
+        PORT: ${{secrets.PORT}}
