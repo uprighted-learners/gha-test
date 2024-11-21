@@ -11,8 +11,6 @@ on:
 
 jobs:
   build:
-    env:
-      PORT: ${{env.PORT}}
     runs-on: ubuntu-latest
 
     strategy:
@@ -32,4 +30,4 @@ jobs:
     - name: Starts server
       run: npm run start
       env:
-        PORT: ${{env.PORT}}
+        PORT: ${{secret.PORT}}
