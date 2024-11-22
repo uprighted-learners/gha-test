@@ -19,14 +19,14 @@ jobs:
             - name: Set up Node.js
               uses: actions/setup-node@v3
               with:
-                  node-version: "21" # Node.js version
+                  node-version: "21"
 
             - name: Install dependencies
               run: npm install
 
             - name: Setup PORT variable
               env:
-                  PORT: ${{ secrets.PORT }} # Reference GitHub secret
+                  PORT: ${{ secrets.PORT }}
               run: |
                   echo "PORT is set to $PORT"
 
@@ -35,10 +35,12 @@ jobs:
                   PORT: ${{ secrets.PORT }}
               run: |
                   echo "Starting application on PORT $PORT"
-                  npm start &
+                  nohup npm start & # Run app in the background with nohup
+
+            - name: Wait for the server to start
+              run: sleep 10 # Wait to ensure the server is running
 
             - name: Test application
               run: |
-                  echo "Waiting for application to start..."
-                  sleep 5
-                  curl http://127.0.0.1:${{ secrets.PORT }}/
+                  echo "Testing application on http://localhost:${{ secrets.PORT }}"
+                  curl -v http://localhost:${{ secrets.PORT }}
