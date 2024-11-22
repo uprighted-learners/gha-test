@@ -43,4 +43,4 @@ jobs:
             - name: Test application
               run: |
                   echo "Testing application on http://localhost:${{ secrets.PORT }}"
-                  curl -v http://localhost:${{ secrets.PORT }}
+                  curl -v http://localhost:4000/
